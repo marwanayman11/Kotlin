@@ -36,6 +36,63 @@ fun main(){
     println(num) //1.0
     println(char) //A
     println(boolean) //true
+    printSize(PizzaSize.SMALL)
+    printSize(PizzaSize.LARGE)
+    try {
+        someFunction()
+        println("Will not be printed")
+    }
+    catch (e: Throwable){
+        println("Caught $e")
+    }
+    finally {
+        println("Finally block was called")
+    }
+    val label = constructRole(ManagerRole("Marwan"))
+    println(label)
+
 }
 class DogN(val name: String)
 data class DogData(val name: String, val age: Int)
+enum class WeekDay{
+    SUNDAY,
+    MONDAY,
+    TUESDAY,
+    WEDNESDAY,
+    THURSDAY,
+    FRIDAY,
+    SATURDAY
+}
+enum class Difficulty{
+    NORMAL,
+    MEDIUM,
+    HIGH
+}
+enum class PizzaSize(val sizeInCm: Int){
+    SMALL(15),
+    MEDIUM(20),
+    LARGE(30),
+    EXTRALARGE(40)
+}
+fun printSize(pizzaSize: PizzaSize){
+    println("$pizzaSize is ${pizzaSize.sizeInCm} cm" )
+    for (i in PizzaSize.values()){
+        println(i)
+    }
+}
+class MyError: Throwable("some message")
+fun someFunction(){
+    throw MyError()
+    println("Will not be printed")
+}
+sealed class Role
+class CeoRole : Role()
+class ManagerRole(val name: String) : Role()
+class WorkerRole(val name: String):Role()
+fun constructRole(role: Role):String{
+  return when(role){
+      is CeoRole -> "The boss"
+      is ManagerRole -> "Manager ${role.name}"
+      is WorkerRole -> role.name
+  }
+}

@@ -1,3 +1,5 @@
+import kotlin.jvm.Throws
+
 fun main(){
     val pluto1 = DogN("Pluto")
     val pluto2 = DogN("Pluto")
@@ -95,4 +97,17 @@ fun constructRole(role: Role):String{
       is ManagerRole -> "Manager ${role.name}"
       is WorkerRole -> role.name
   }
+}
+@Throws(ArithmeticException::class)
+fun divide (a:Int,b:Int): Int{
+    return a/b
+}
+annotation class MyAnnotation(val someDescription: String) //Custom annotation
+@MyAnnotation("Class Annotation")
+class A(
+    @MyAnnotation("Constructor property annotation")
+    val a:Int
+){
+    @MyAnnotation("Method annotation")
+    fun b(){}
 }
